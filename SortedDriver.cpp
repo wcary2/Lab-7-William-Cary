@@ -31,10 +31,28 @@ vector<double> getNums(size_t listSize, double minNum, double maxNum)
 	return theList;
 }
 
-void fourSecond() {
-	
+/*void fourSecond() {
+	int currentTest(0);
+	int bubbleSize(0), insertionSize(0), selectionSize(0),
+		mergeSize(0), quickSize(0);
+	bool fin = false;
+	while (!fin) {
+		srand(15);
+		Timer time;
+		switch (currentTest) {
+		case 0:
+			if (bubbleSize == 0) {
+				bubbleSize = 15;
+			}
+			vector<double> bubblevec = getNums(bubbleSize, -bubbleSize, bubbleSize);
+			time.start();
+			bubble(bubblevec);
+			time.stop();
+			if(4)
+		}
+	}
 	return;
-}
+}*/
 // post: a sorted list of numWords words of length
 //         wordLength with characters chosen randomly from
 //         alphabet has been returned.
@@ -188,12 +206,9 @@ int main()
 		cout << "Enter size for numbers: ";
 		int n = 0;
 		cin >> n;
-		if (n == 0) {
+		if (n <= 0) {
 			sortTest++;
 			continue;
-		}
-		if (n < 0) {
-			
 		}
 		cout << "Enter seed for rand: ";
 		unsigned int seed;
