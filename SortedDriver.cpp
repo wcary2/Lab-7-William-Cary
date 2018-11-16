@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "WilliamCary.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ vector<double> getNums(size_t listSize, double minNum, double maxNum)
 		theList.push_back(randReal(minNum, maxNum));
 	}
 
-	sort(begin(theList), end(theList));
+	//sort(begin(theList), end(theList));
 
 	return theList;
 }
@@ -149,15 +150,41 @@ int unmatched(list<string> & A, list<string> & B)
 
 int main()
 {
+	int sortTest = 0;
 	cout << "Find the most isolated number" << endl
 		<< "-----------------------------" << endl << endl;
-	while (true)
+	while (sortTest < 5)
 	{
+		string currentTest = "";
+		switch (sortTest) {
+		case 0:
+			cout << "---------- Bubble Sort ----------" << endl << endl;
+			currentTest = "Bubble Sort";
+			break;
+		case 1:
+			cout << "----------  Insertion  ----------" << endl << endl;
+			currentTest = "Insertion Sort";
+			break;
+		case 2:
+			cout << "----------  Selection  ----------" << endl << endl;
+			currentTest = "Selection Sort";
+			break;
+		case 3:
+			cout << "----------  Merge Sort ----------" << endl << endl;
+			currentTest = "Merge Sort";
+			break;
+		case 4:
+			cout << "----------  Quick Sort ----------" << endl << endl;
+			currentTest = "Quick Sort";
+			break;
+		}
 		cout << "Enter size for numbers: ";
 		int n = 0;
 		cin >> n;
-		if (n <= 0)
-			break;
+		if (n <= 0) {
+			sortTest++;
+			continue;
+		}
 		cout << "Enter seed for rand: ";
 		unsigned int seed;
 		cin >> seed;
@@ -171,22 +198,40 @@ int main()
 		cout << "Constructed in " << get() << " seconds"
 			<< endl;
 
-		if (n < 10)
+		if (n < 25)
 			cout << numbers << endl << endl;
 
 		// Report a most isolated isolated number
 		Timer time;
 		time.start();
-		double isolated = mostIsolated(numbers);
+		switch (sortTest) {
+		case 0:
+			bubble(numbers);
+			break;
+		case 1:
+			insertion(numbers);
+			break;
+		case 2:
+			selection(numbers);
+			break;
+		case 3:
+			numbers = mergesort(numbers);
+			break;
+		case 4:
+			numbers = quicksort(numbers);
+			break;
+		}
 		time.stop();
-		cout << "The most isolated number is "
-			<< isolated << endl
-			<< "calculated in " << time() << " seconds"
+		cout << "Sorted version: " << endl;
+		if (n < 25)
+			cout << numbers << endl << endl; 
+		cout << currentTest << " sorted the list in: "
+			<< time() << " seconds"
 			<< endl << endl;
 	}
 
 
-	cout << endl << endl;
+	/*cout << endl << endl;
 	cout << "Count the unmatched words" << endl
 		<< "-------------------------" << endl << endl;
 	while (true)
@@ -233,7 +278,7 @@ int main()
 			<< " words in A were not in B" << endl
 			<< "calculated in " << time() << " seconds"
 			<< endl << endl;
-	}
+	}*/
 
 	return 0;
 }
