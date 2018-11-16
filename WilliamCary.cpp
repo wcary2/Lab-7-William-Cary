@@ -1,8 +1,8 @@
 #include "WilliamCary.h"
-
+#include <iostream>
 vector<double> bubble(vector<double> & vec) {
-	unsigned sorted = 0;
-	if (vec.size > 1) {
+	int sorted = 0;
+	if (vec.size() > 1) {
 		do {
 			sorted = 0;
 			for (unsigned i = 0; i < vec.size() - 1; i++) {
@@ -19,7 +19,7 @@ vector<double> bubble(vector<double> & vec) {
 }
 
 vector<double> insertion(vector<double> & vec) {
-	for (unsigned i = 1; i < vec.size() - 1; i++) {
+	for (unsigned i = 1; i < vec.size(); i++) {
 		double val = vec[i];
 		int j = i - 1;
 		while (j >= 0 && vec[j] > val) {
@@ -33,13 +33,18 @@ vector<double> insertion(vector<double> & vec) {
 //change
 vector<double> selection(vector<double> & vec) {
 	for (unsigned i = 0; i < vec.size() - 1; i++) {
-		auto temp = vec[i];
-		for (unsigned j = 1; j < vec.size(); j++) {
-			if (temp < vec[j])
-				temp = vec[j];
+		double smallest = vec[i];
+		int swap = i;
+		for (unsigned j = i+1; j < vec.size(); j++) {
+			if (vec[j] < smallest) {
+				std::cout << std::endl << "smallest = " << vec[j] << endl;
+				smallest = vec[j];
+				swap = j;
+			}
 		}
-		vec[i + 1] = vec[i];
-		vec[i] = temp;
+		cout << "swapping: " << vec[swap] << " at pos " << swap << " with " << vec[i] << " at pos " << i << endl;
+		vec[swap] = vec[i];
+		vec[i] = smallest;
 	}
 	return vec;
 }
@@ -53,7 +58,7 @@ vector<double> mergesort(vector<double> vec) {
 		vector<double> left;
 		vector<double> right;
 
-		for(unsigned i = 0; i < middle; i++) {
+		for(int i = 0; i < middle; i++) {
 			left.push_back(vec[i]);
 		}
 		for (unsigned i = middle; i < vec.size(); i++) {
