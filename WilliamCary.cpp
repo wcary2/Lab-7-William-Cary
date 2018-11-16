@@ -30,7 +30,7 @@ vector<double> insertion(vector<double> & vec) {
 	}
 	return vec;
 }
-//change
+
 vector<double> selection(vector<double> & vec) {
 	for (unsigned i = 0; i < vec.size() - 1; i++) {
 		double smallest = vec[i];
