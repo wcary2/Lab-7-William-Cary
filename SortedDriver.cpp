@@ -31,7 +31,10 @@ vector<double> getNums(size_t listSize, double minNum, double maxNum)
 	return theList;
 }
 
-
+void fourSecond() {
+	
+	return;
+}
 // post: a sorted list of numWords words of length
 //         wordLength with characters chosen randomly from
 //         alphabet has been returned.
@@ -151,7 +154,7 @@ int unmatched(list<string> & A, list<string> & B)
 int main()
 {
 	int sortTest = 0;
-	cout << "Find the most isolated number" << endl
+	cout << "Testing various sort algorithm efficiencies" << endl
 		<< "-----------------------------" << endl << endl;
 	while (sortTest < 6)
 	{
@@ -185,9 +188,12 @@ int main()
 		cout << "Enter size for numbers: ";
 		int n = 0;
 		cin >> n;
-		if (n <= 0) {
+		if (n == 0) {
 			sortTest++;
 			continue;
+		}
+		if (n < 0) {
+			
 		}
 		cout << "Enter seed for rand: ";
 		unsigned int seed;
@@ -205,30 +211,41 @@ int main()
 		if (n < 25)
 			cout << numbers << endl << endl;
 
-		// Report a most isolated isolated number
+		// Report a sorting time
 		Timer time;
-		time.start();
+		
 		switch (sortTest) {
 		case 0:
+			time.start();
 			bubble(numbers);
+			time.stop();
 			break;
 		case 1:
+			time.start();
 			insertion(numbers);
+			time.stop();
 			break;
 		case 2:
+			time.start();
 			selection(numbers);
+			time.stop();
 			break;
 		case 3:
+			time.start();
 			numbers = mergesort(numbers);
+			time.stop();
 			break;
 		case 4:
+			time.start();
 			numbers = quicksort(numbers);
+			time.stop();
 			break;
 		case 5:
+			time.start();
 			sort(begin(numbers), end(numbers));
+			time.stop();
 			break;
 		}
-		time.stop();
 		cout << "Sorted version: " << endl;
 		if (n < 25)
 			cout << numbers << endl << endl; 
