@@ -153,7 +153,7 @@ int main()
 	int sortTest = 0;
 	cout << "Find the most isolated number" << endl
 		<< "-----------------------------" << endl << endl;
-	while (sortTest < 5)
+	while (sortTest < 6)
 	{
 		string currentTest = "";
 		switch (sortTest) {
