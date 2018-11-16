@@ -48,27 +48,24 @@ vector<double> selection(vector<double> & vec) {
 }
 
 vector<double> mergesort(vector<double> vec) {
-	if (vec.size() == 1) {
+	if (vec.size() <= 1) {
 		return vec;
 	}
 	else {
 		int middle = vec.size() / 2;
 		vector<double> left;
 		vector<double> right;
-
-		for(int i = 0; i < middle; i++) {
+		for (unsigned i = 0; i < middle; i++) {
 			left.push_back(vec[i]);
 		}
 		for (unsigned i = middle; i < vec.size(); i++) {
 			right.push_back(vec[i]);
 		}
-		if (left.back() < right.front()) {
-			return vec;
-		}
 		left = mergesort(left);
 		right = mergesort(right);
 
 		vec = merge(left, right);
+		
 		return vec;
 	}
 }
@@ -81,17 +78,18 @@ vector<double> merge(vector<double> left, vector<double> right) {
 		if (*rightIt < *leftIt) {
 			merged.push_back(*rightIt);
 			rightIt++;
+			continue;
 		}
 		else {
 			merged.push_back(*leftIt);
 			leftIt++;
 		}
 	}
-	while (leftIt == left.end() && rightIt != right.end()) {
+	while (rightIt != right.end()) {
 		merged.push_back(*rightIt);
 		rightIt++;
 	}
-	while (rightIt == right.end() && leftIt != left.end()) {
+	while (leftIt != left.end()) {
 		merged.push_back(*leftIt);
 		leftIt++;
 	}
@@ -99,12 +97,12 @@ vector<double> merge(vector<double> left, vector<double> right) {
 }
 
 vector<double> quicksort(vector<double> vec) {
-	if (vec.size() == 1) {
+	if (vec.size() <= 1) {
 		return vec;
 	}
 	else {
 		vector<double> less, greater, equal;
-		double pivot = vec.back();
+		double pivot = vec[vec.size() - 1];
 		vec.pop_back();
 		for (unsigned i = 0; i < vec.size(); i++) {
 			if (vec[i] == pivot) {
@@ -117,12 +115,17 @@ vector<double> quicksort(vector<double> vec) {
 		greater = quicksort(greater);
 		vector<double> merged(less);
 		merged.push_back(pivot);
-		for (unsigned i = 0; i < equal.size(); i++) {
-			merged.push_back(pivot);
+		if (equal.size() > 0) {
+			for (unsigned i = 0; i < equal.size(); i++) {
+				merged.push_back(pivot);
+			}
 		}
-		for (unsigned i = 0; i < greater.size(); i++) {
-			merged.push_back(greater[i]);
+		if (greater.size() > 0) {
+			for (unsigned i = 0; i < greater.size(); i++) {
+				merged.push_back(greater[i]);
+			}
 		}
+
 		return merged;
 	}
 }
