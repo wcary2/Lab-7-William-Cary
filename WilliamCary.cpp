@@ -37,12 +37,10 @@ vector<double> selection(vector<double> & vec) {
 		int swap = i;
 		for (unsigned j = i+1; j < vec.size(); j++) {
 			if (vec[j] < smallest) {
-				std::cout << std::endl << "smallest = " << vec[j] << endl;
 				smallest = vec[j];
 				swap = j;
 			}
 		}
-		cout << "swapping: " << vec[swap] << " at pos " << swap << " with " << vec[i] << " at pos " << i << endl;
 		vec[swap] = vec[i];
 		vec[i] = smallest;
 	}
