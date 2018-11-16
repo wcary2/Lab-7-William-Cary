@@ -177,6 +177,10 @@ int main()
 			cout << "----------  Quick Sort ----------" << endl << endl;
 			currentTest = "Quick Sort";
 			break;
+		case 5:
+			cout << "----------  STL::Sort  ----------" << endl << endl;
+			currentTest = "STL::sort";
+			break;
 		}
 		cout << "Enter size for numbers: ";
 		int n = 0;
@@ -219,6 +223,9 @@ int main()
 			break;
 		case 4:
 			numbers = quicksort(numbers);
+			break;
+		case 5:
+			sort(begin(numbers), end(numbers));
 			break;
 		}
 		time.stop();
