@@ -70,6 +70,40 @@ vector<double> mergesort(vector<double> vec) {
 	}
 }
 
+
+void mergesort2(vector<double> & vec) {
+	if (vec.size() <= 1) {
+		return;
+	}
+	else {
+		int middle = vec.size() / 2;
+		vector<double> left(vec.begin(), vec.begin() + middle);
+		vector<double> right(vec.begin() + middle, vec.end());
+		mergesort2(left);
+		mergesort2(right);
+
+		merge(left, right, vec);
+
+		return;
+	}
+}
+
+void merge(vector<double> & left, vector<double> & right, vector<double> & vec) {
+	vector<double>::iterator leftIt = left.begin();
+	vector<double>::iterator rightIt = right.begin();
+	vec.clear();
+	while (leftIt != left.end() && rightIt != right.end()) {
+		(*leftIt < *rightIt) ? vec.push_back(*leftIt++) : vec.push_back(*rightIt++);
+	}
+	while (leftIt != left.end()) {
+		vec.push_back(*leftIt++);
+	}
+	while (rightIt != right.end()) {
+		vec.push_back(*leftIt++);
+	}
+}
+
+
 vector<double> merge(vector<double> left, vector<double> right) {
 	vector<double>::iterator leftIt = left.begin();
 	vector<double>::iterator rightIt = right.begin();

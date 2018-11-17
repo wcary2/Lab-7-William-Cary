@@ -107,7 +107,7 @@ int main()
 			break;
 		case 3:
 			time.start();
-			numbers = mergesort(numbers);
+			mergesort2(numbers);
 			time.stop();
 			break;
 		case 4:
