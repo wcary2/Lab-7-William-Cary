@@ -47,28 +47,36 @@ vector<double> selection(vector<double> & vec) {
 	return vec;
 }
 
-vector<double> mergesort(vector<double> vec) {
+
+void mergesort(vector<double> & vec) {
 	if (vec.size() <= 1) {
-		return vec;
+		return;
 	}
 	else {
 		int middle = vec.size() / 2;
-		vector<double> left;
-		vector<double> right;
-		for (unsigned i = 0; i < middle; i++) {
-			left.push_back(vec[i]);
-		}
-		for (unsigned i = middle; i < vec.size(); i++) {
-			right.push_back(vec[i]);
-		}
-		left = mergesort(left);
-		right = mergesort(right);
+		vector<double> left(vec.begin(), vec.begin() + middle);
+		vector<double> right(vec.begin() + middle, vec.end());
+		mergesort(left);
+		mergesort(right);
 
-		vec = merge(left, right);
-		
-		return vec;
+		merge(left, right, vec);
+
+		return;
 	}
 }
+
+void merge(vector<double> & left, vector<double> & right, vector<double> & vec) {
+	int l = 0, r = 0, m = 0;
+	int leftsize = left.size(), rightsize = right.size();
+	while (l < leftsize && r < rightsize) {
+		vec[m++] = (left[l] < right[r]) ? left[l++] : right[r++];
+	}
+	while (l < leftsize)
+		vec[m++] = left[l++];
+	while (r < rightsize)
+		vec[m++] = right[r++];
+}
+
 
 vector<double> merge(vector<double> left, vector<double> right) {
 	vector<double>::iterator leftIt = left.begin();
@@ -96,9 +104,9 @@ vector<double> merge(vector<double> left, vector<double> right) {
 	return merged;
 }
 
-vector<double> quicksort(vector<double> vec) {
+void quicksort(vector<double> vec) {
 	if (vec.size() <= 1) {
-		return vec;
+		return;
 	}
 	else {
 		vector<double> less, greater, equal;
@@ -111,21 +119,27 @@ vector<double> quicksort(vector<double> vec) {
 			}
 			(pivot > vec[i]) ? less.push_back(vec[i]) : greater.push_back(vec[i]);
 		}
-		less = quicksort(less);
-		greater = quicksort(greater);
-		vector<double> merged(less);
-		merged.push_back(pivot);
+		quicksort(less);
+		quicksort(greater);
+		int vecPos = 0;
+		if (less.size() > 0) {
+			for (unsigned i = 0; i < less.size(); i++) {
+				vec[vecPos] = less[i];
+				vecPos++;
+			}
+		}
 		if (equal.size() > 0) {
 			for (unsigned i = 0; i < equal.size(); i++) {
-				merged.push_back(pivot);
+				vec[vecPos] = equal[i];
+				vecPos++;
 			}
 		}
 		if (greater.size() > 0) {
 			for (unsigned i = 0; i < greater.size(); i++) {
-				merged.push_back(greater[i]);
+				vec[vecPos] = greater[i];
+				vecPos++;
 			}
 		}
-
-		return merged;
+		return;
 	}
 }
