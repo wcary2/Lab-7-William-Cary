@@ -107,12 +107,12 @@ int main()
 			break;
 		case 3:
 			time.start();
-			mergesort2(numbers);
+			mergesort(numbers);
 			time.stop();
 			break;
 		case 4:
 			time.start();
-			numbers = quicksort(numbers);
+			quicksort(numbers);
 			time.stop();
 			break;
 		case 5:
